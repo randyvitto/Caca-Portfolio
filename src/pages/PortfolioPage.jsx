@@ -1,46 +1,49 @@
+// src/pages/PortfolioPage.jsx
+
 import React, { useState, useEffect } from 'react';
 import ProjectGrid from '../components/ProjectGrid';
-import ProjectModal from '../components/ProjectModal';
+import PdfModal from '../components/PdfModal'; // Import the new PDF modal
 
 const mockProjects = [
-    { id: 1, title: "It's fun to dream", category: "Illustration", imageUrl: "https://placehold.co/600x450/f0a443/ffffff?text=Robot", details: "Detailed description for 'It's fun to dream'. This piece explores the intersection of technology and childhood imagination." },
-    { id: 2, title: "Chimp tee", category: "Graphic Design", imageUrl: "https://placehold.co/600x450/4a8ab3/ffffff?text=Chimp", details: "Detailed description for 'Chimp tee'. A graphic illustration designed for apparel with a striking and memorable character." },
-    { id: 3, title: "3NES Show", category: "Fan Art", imageUrl: "https://placehold.co/600x450/d75a4a/ffffff?text=Mario", details: "Detailed description for '3NES Show'. A tribute to classic video games, reimagining an iconic character with a modern style." },
-    { id: 4, title: "Monster Friends", category: "Character Design", imageUrl: "https://placehold.co/600x450/63c1a5/ffffff?text=Monsters", details: "Detailed description for 'Monster Friends'. A series of friendly monster characters developed for an animated short." },
-    { id: 5, title: "Space Explorer", category: "Illustration", imageUrl: "https://placehold.co/600x450/3d4a6a/ffffff?text=Astronaut", details: "Detailed description for 'Space Explorer'. An editorial illustration about the wonders of space exploration." },
-    { id: 6, title: "Cityscape", category: "Concept Art", imageUrl: "https://placehold.co/600x450/c7a3c3/ffffff?text=City", details: "Detailed description for 'Cityscape'. Concept art for a futuristic city in a video game." },
+    { id: 1, title: "Sweetheart Revival", category: "Design", imageUrl: "/images/Image-1.png", pdfUrl: "/pdfs/SWEETHEART-REVIVAL.pdf" },
+    { id: 2, title: "South Sea", category: "Design", imageUrl: "/images/Image-2.png", pdfUrl: "/pdfs/SOUTH-SEA.pdf" },
+    { id: 3, title: "Inner Reflection", category: "Design", imageUrl: "/images/Image-3.png", pdfUrl: "/pdfs/ACNE-STUDIOS.pdf" },
+    { id: 4, title: "Venus", category: "Design", imageUrl: "/images/Image-4.png", pdfUrl: "/pdfs/VENUS.pdf" },
+    { id: 5, title: "Fashion Illustration And Technical Flats", category: "Design", imageUrl: "/images/Image-5.png", pdfUrl: "/pdfs/FASHION-LLUSTRATION-AND-TECHNICAL-FLATS.pdf" },
+    // Make sure you have a pdfUrl for each project
 ];
 
 export default function PortfolioPage() {
     const [projects, setProjects] = useState([]);
-    const [selectedProject, setSelectedProject] = useState(null);
+    const [selectedPdf, setSelectedPdf] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         setProjects(mockProjects);
     }, []);
 
+    // Lock body scroll when modal is open
     useEffect(() => {
         document.body.style.overflow = isModalOpen ? 'hidden' : 'auto';
-        return () => { document.body.style.overflow = 'auto'; };
     }, [isModalOpen]);
 
     const handleProjectClick = (project) => {
-        setSelectedProject(project);
+        setSelectedPdf(project.pdfUrl);
         setIsModalOpen(true);
     };
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        setTimeout(() => setSelectedProject(null), 300);
+        // Delay clearing to allow for closing animation if you add one
+        setTimeout(() => setSelectedPdf(null), 300);
     };
 
-    return (
+  return (
         <>
             <ProjectGrid projects={projects} onProjectClick={handleProjectClick} />
-            {selectedProject && (
-                <ProjectModal
-                    project={selectedProject}
+            {isModalOpen && selectedPdf && ( // <-- This is the fix
+                <PdfModal
+                    pdfUrl={selectedPdf}
                     isOpen={isModalOpen}
                     onClose={handleCloseModal}
                 />

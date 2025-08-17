@@ -22,9 +22,9 @@ export default function App() {
     };
 
     return (
-        <div className="bg-gray-50 text-gray-800 font-sans antialiased">
+        <div className="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen" >
             <Header setCurrentPage={setCurrentPage} currentPage={currentPage} />
-            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1">
                 {renderPage()}
             </main>
             <Footer />
