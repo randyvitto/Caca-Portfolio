@@ -16,14 +16,14 @@ export default function ContactPage() {
                 <div className="flex items-center">
                     <div className="w-28 font-bold text-gray-600">Email:</div>
                     <a href="mailto:navisakkhairani9@gmail.com" className="text-blue-600 hover:underline ml-4">
-                        navisakkhairani9@gmail.com
+                        navisakhairani9@gmail.com
                     </a>
                 </div>
 
                 {/* Phone Number */}
                 <div className="flex items-center">
                     <div className="w-28 font-bold text-gray-600">Phone:</div>
-                    <div className="text-gray-800 ml-4">+49 403 787 713</div>
+                    <div className="text-gray-800 ml-4">+61 403 787 713</div>
                 </div>
 
                 {/* Address */}
